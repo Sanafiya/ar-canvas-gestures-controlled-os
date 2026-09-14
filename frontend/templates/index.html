@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Canvas & Gestures Controlled OS</title>
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+    <!-- Main Application Wrapper -->
+    <div class="app-container">
+
+        <!-- HEADER SECTION -->
+        <header class="main-header">
+            <h1 class="project-title" id="project-title">AR Canvas & Gestures Controlled OS</h1>
+            <p class="project-subtitle" id="project-subtitle">Gesture-Based Human Computer Interaction System</p>
+        </header>
+
+        <!-- MAIN DASHBOARD CONTENT -->
+        <main class="dashboard-content">
+
+            <!-- LEFT COLUMN: CAMERA PREVIEW & CONTROLS -->
+            <section class="left-panel">
+                
+                <!-- Camera Preview Card -->
+                <div class="card camera-card" id="camera-card">
+                    <h2 class="card-title">Camera Preview</h2>
+                    <div class="camera-viewport" id="camera-viewport">
+                        <img id="videofeed" src="/video_feed"
+                        alt="Live Gesture Camera Stream"
+                        width="100%">
+                    </div>
+                </div>
+
+                <!-- System Controls Card -->
+                <div class="card control-card" id="control-card">
+                    <h2 class="card-title">System Controls</h2>
+                    <div class="button-group">
+                        <button type="button" class="btn btn-start" id="btn-start">START GESTURE CONTROL</button>
+                        <button type="button" class="btn btn-stop" id="btn-stop" disabled>STOP GESTURE CONTROL</button>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- RIGHT COLUMN: STATUS & GESTURE REFERENCE GUIDE -->
+            <section class="right-panel">
+
+                <!-- System Status Dashboard Card -->
+                <div class="card status-card" id="status-card">
+                    <h2 class="card-title">System Status</h2>
+                    
+                    <ul class="status-list" id="status-list">
+                        <li class="status-item">
+                            <span class="status-label">System Status:</span>
+                            <span class="status-badge status-inactive" id="status-system">INACTIVE</span>
+                        </li>
+                        <li class="status-item">
+                            <span class="status-label">Camera Status:</span>
+                            <span class="status-value" id="status-camera">OFF</span>
+                        </li>
+                        <li class="status-item">
+                            <span class="status-label">Gesture Status:</span>
+                            <span class="status-value" id="status-gesture">WAITING</span>
+                        </li>
+                        <li class="status-item">
+                            <span class="status-label">Current Gesture:</span>
+                            <span class="status-value highlight" id="current-gesture">—</span>
+                        </li>
+                        <li class="status-item">
+                            <span class="status-label">Current Action:</span>
+                            <span class="status-value highlight" id="current-action">—</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Gesture Reference Guide Card -->
+                <div class="card guide-card" id="guide-card">
+                    <h2 class="card-title">Gesture Reference Guide</h2>
+                    
+                    <div class="guide-grid" id="guide-grid">
+                        <div class="guide-item" id="guide-item-1" data-gesture="Index Finger">
+                            <span class="gesture-name">Index Finger</span>
+                            <span class="gesture-arrow">→</span>
+                            <span class="gesture-action">Mouse Cursor Movement</span>
+                        </div>
+                        
+                        <div class="guide-item" id="guide-item-2" data-gesture="Pinch">
+                            <span class="gesture-name">Pinch</span>
+                            <span class="gesture-arrow">→</span>
+                            <span class="gesture-action">Mouse Click</span>
+                        </div>
+
+                        <div class="guide-item" id="guide-item-3" data-gesture="Two Fingers">
+                            <span class="gesture-name">Two Fingers</span>
+                            <span class="gesture-arrow">→</span>
+                            <span class="gesture-action">Scroll</span>
+                        </div>
+
+                        <div class="guide-item" id="guide-item-4" data-gesture="Thumbs Up">
+                            <span class="gesture-name">Thumbs Up</span>
+                            <span class="gesture-arrow">→</span>
+                            <span class="gesture-action">Volume Increase</span>
+                        </div>
+
+                        <div class="guide-item" id="guide-item-5" data-gesture="Thumbs Down">
+                            <span class="gesture-name">Thumbs Down</span>
+                            <span class="gesture-arrow">→</span>
+                            <span class="gesture-action">Volume Decrease</span>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

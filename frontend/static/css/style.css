@@ -1,0 +1,278 @@
+/* ==========================================================================
+   AR Canvas & Gestures Controlled OS - Dark Theme Dashboard
+   ========================================================================== */
+
+/* Theme Variables */
+:root {
+    --bg-dark: #0f172a;
+    --card-bg: #1e293b;
+    --card-border: #334155;
+    --primary-blue: #38bdf8;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --accent-success: #22c55e;
+    --accent-danger: #ef4444;
+    --accent-warning: #f59e0b;
+    
+    --radius-lg: 16px;
+    --radius-md: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* Reset & Layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Header Styles */
+.main-header {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.project-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.project-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+}
+
+/* Grid Layout */
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+}
+
+@media (max-width: 900px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card Component Base */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 10px;
+}
+
+.left-panel, .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Camera Viewport */
+.camera-viewport {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #020617;
+    border-radius: var(--radius-md);
+    border: 2px dashed var(--card-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.camera-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.camera-icon {
+    font-size: 2.5rem;
+    opacity: 0.7;
+}
+
+.camera-placeholder-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.video-feed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 16px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-start {
+    background-color: var(--accent-success);
+    color: #052e16;
+}
+
+.btn-start:hover:not(:disabled) {
+    background-color: #16a34a;
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+}
+
+.btn-stop {
+    background-color: var(--accent-danger);
+    color: #450a0a;
+}
+
+.btn-stop:hover:not(:disabled) {
+    background-color: #dc2626;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Status Dashboard */
+.status-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.status-label {
+    color: var(--text-muted);
+}
+
+.status-value {
+    font-weight: 600;
+}
+
+.status-value.highlight {
+    color: var(--primary-blue);
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-inactive {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--accent-danger);
+    border: 1px solid var(--accent-danger);
+}
+
+.status-active {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: var(--accent-success);
+    border: 1px solid var(--accent-success);
+}
+
+/* Gesture Guide Grid */
+.guide-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.guide-item {
+    display: grid;
+    grid-template-columns: 1.2fr 0.3fr 1.5fr;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.guide-item.active-gesture {
+    background-color: rgba(56, 189, 248, 0.15);
+    border-color: var(--primary-blue);
+    transform: translateX(4px);
+}
+
+.gesture-name {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.gesture-arrow {
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.gesture-action {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.guide-item.active-gesture .gesture-action {
+    color: var(--primary-blue);
+    font-weight: 600;
+}
