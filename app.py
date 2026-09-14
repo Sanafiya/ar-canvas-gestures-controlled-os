@@ -1,4 +1,5 @@
 import os
+os.environ['XAUTHORITY'] = '/dev/null'
 try:
     from pyvirtualdisplay import Display
     display = Display(visible=0, size=(1080, 1920))
