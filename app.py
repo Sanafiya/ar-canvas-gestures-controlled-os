@@ -1,3 +1,8 @@
+import os
+from pyvirtualdisplay import Display
+
+display = Display(visible=0, size=(1080, 1920))
+display.start()
 import cv2
 
 import numpy as np
