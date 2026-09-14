@@ -1,4 +1,11 @@
+import sys
 import os
+
+sys.modules['tkinter'] = None
+sys.modules['mouseinfo'] = None
+sys.modules['pyautogui'] = None
+sys.modules['Xlib'] = None
+
 os.environ['DISPLAY'] = ':0'
 os.environ['PYAUTOGUI_NOT_A_GUI'] = 'True'
 
@@ -8,6 +15,7 @@ try:
     display.start()
 except Exception:
     pass
+
 import cv2
 
 import numpy as np
