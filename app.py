@@ -1,8 +1,10 @@
 import os
-from pyvirtualdisplay import Display
-
-display = Display(visible=0, size=(1080, 1920))
-display.start()
+try:
+    from pyvirtualdisplay import Display
+    display = Display(visible=0, size=(1080, 1920))
+    display.start()
+except Exception:
+    os.environ['DISPLAY'] = ':0'
 import cv2
 
 import numpy as np
