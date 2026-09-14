@@ -1,11 +1,13 @@
 import os
-os.environ['XAUTHORITY'] = '/dev/null'
+os.environ['DISPLAY'] = ':0'
+os.environ['PYAUTOGUI_NOT_A_GUI'] = 'True'
+
 try:
     from pyvirtualdisplay import Display
     display = Display(visible=0, size=(1080, 1920))
     display.start()
 except Exception:
-    os.environ['DISPLAY'] = ':0'
+    pass
 import cv2
 
 import numpy as np
