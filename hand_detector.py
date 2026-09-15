@@ -1,19 +1,15 @@
 import cv2
 import mediapipe as mp
-from mediapipe.python.solutions import hands as mp_hands
-from mediapipe.python.solutions import drawing_utils as mp_draw
-from mediapipe.python.solutions import drawing_styles as mp_drawing_styles
 
 class HandDetector:
     def __init__(self, max_hands=1, detection_con=0.7, track_con=0.7):
-        """Initializes the MediaPipe Hands detection pipeline."""
         self.max_hands = max_hands
         self.detection_con = detection_con
         self.track_con = track_con
 
-        self.mp_hands = mp_hands
-        self.mp_draw = mp_draw
-        self.mp_drawing_styles = mp_drawing_styles
+        self.mp_hands = mp.solutions.hands
+        self.mp_draw = mp.solutions.drawing_utils
+        self.mp_drawing_styles = mp.solutions.drawing_styles
 
         self.hands = self.mp_hands.Hands(
             static_image_mode=False,
@@ -23,7 +19,6 @@ class HandDetector:
         )
 
     def find_hands(self, frame, draw=True):
-        """Converts frame to RGB, processes hand landmarks, and draws landmarks."""
         if frame is None:
             return None, None
 
@@ -43,7 +38,6 @@ class HandDetector:
         return frame, results
 
     def get_landmark_list(self, results, width, height):
-        """Extracts landmark pixel coordinates from detection results."""
         landmark_list = []
         if results and results.multi_hand_landmarks:
             primary_hand = results.multi_hand_landmarks[0]
