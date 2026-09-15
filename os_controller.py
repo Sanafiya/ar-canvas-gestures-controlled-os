@@ -1,20 +1,12 @@
-try:
-    import pyautogui
-except ImportError:
-    pyautogui = None
-
 import time
 import numpy as np
+import pyautogui
 
-if pyautogui is not None:
-            pyautogui.FAILSAFE = False
+pyautogui.FAILSAFE = False
 
 class OSController:
     def __init__(self, frame_w=640, frame_h=480):
-        if pyautogui is not None:
-            self.screen_w, self.screen_h = pyautogui.size()
-        else:
-            self.screen_w, self.screen_h = 1920, 1080
+        self.screen_w, self.screen_h = pyautogui.size()
         self.frame_w = frame_w
         self.frame_h = frame_h
 
