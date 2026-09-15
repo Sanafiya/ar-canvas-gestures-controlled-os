@@ -1,21 +1,8 @@
-import sys
 import os
+from pyvirtualdisplay import Display
 
-sys.modules['tkinter'] = None
-sys.modules['mouseinfo'] = None
-sys.modules['pyautogui'] = None
-sys.modules['Xlib'] = None
-
-os.environ['DISPLAY'] = ':0'
-os.environ['PYAUTOGUI_NOT_A_GUI'] = 'True'
-
-try:
-    from pyvirtualdisplay import Display
-    display = Display(visible=0, size=(1080, 1920))
-    display.start()
-except Exception:
-    pass
-
+display = Display(visible=0, size=(1080, 1920))
+display.start()
 import cv2
 
 import numpy as np
@@ -71,8 +58,6 @@ from os_controller import OSController
 #     ├── css/
 
 #     └── js/
-
-# New Code (இப்படி மாத்து):
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
