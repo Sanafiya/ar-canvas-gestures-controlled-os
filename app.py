@@ -1,8 +1,6 @@
-import os
-from pyvirtualdisplay import Display
-
-display = Display(visible=0, size=(1080, 1920))
-display.start()
+from xvfbwrapper import Xvfb
+vdisplay = Xvfb(width=1280, height=720)
+vdisplay.start()
 import cv2
 
 import numpy as np
