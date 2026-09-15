@@ -1,12 +1,23 @@
 import time
 import numpy as np
-import pyautogui
 
-pyautogui.FAILSAFE = False
+try:
+    import pyautogui
+    pyautogui.FAILSAFE = False
+    HAS_PYAUTOGUI = True
+except Exception:
+    HAS_PYAUTOGUI = False
 
 class OSController:
     def __init__(self, frame_w=640, frame_h=480):
-        self.screen_w, self.screen_h = pyautogui.size()
+        if HAS_PYAUTOGUI:
+            try:
+                self.screen_w, self.screen_h = pyautogui.size()
+            except Exception:
+                self.screen_w, self.screen_h = 1920, 1080
+        else:
+            self.screen_w, self.screen_h = 1920, 1080
+
         self.frame_w = frame_w
         self.frame_h = frame_h
 
@@ -27,7 +38,7 @@ class OSController:
         self.scroll_cooldown = 0.05  # seconds
 
     def execute_action(self, gesture, landmarks, frame_w, frame_h):
-        """Maps detected gesture to OS actions with smoothing and debouncing."""
+        """Maps detected gesture to OS actions safely without crashing on cloud servers."""
         if not landmarks or gesture == "NO_GESTURE":
             self.prev_scroll_y = None
             return
@@ -50,14 +61,23 @@ class OSController:
             curr_x = self.prev_x + (mapped_x - self.prev_x) / self.smooth_factor
             curr_y = self.prev_y + (mapped_y - self.prev_y) / self.smooth_factor
 
-            pyautogui.moveTo(curr_x, curr_y)
+            if HAS_PYAUTOGUI:
+                try:
+                    pyautogui.moveTo(curr_x, curr_y)
+                except Exception:
+                    pass
+
             self.prev_x, self.prev_y = curr_x, curr_y
 
         # 2. PINCH -> Left Click (with cooldown debounce)
         elif gesture == "PINCH":
             self.prev_scroll_y = None
             if current_time - self.last_click_time > self.click_cooldown:
-                pyautogui.click()
+                if HAS_PYAUTOGUI:
+                    try:
+                        pyautogui.click()
+                    except Exception:
+                        pass
                 self.last_click_time = current_time
 
         # 3. TWO FINGERS -> Scroll Up / Down based on vertical movement
@@ -67,10 +87,18 @@ class OSController:
                 delta_y = current_y - self.prev_scroll_y
                 if current_time - self.last_scroll_time > self.scroll_cooldown:
                     if delta_y < -8:  # Moving fingers UP -> Scroll UP
-                        pyautogui.scroll(250)
+                        if HAS_PYAUTOGUI:
+                            try:
+                                pyautogui.scroll(250)
+                            except Exception:
+                                pass
                         self.last_scroll_time = current_time
                     elif delta_y > 8:  # Moving fingers DOWN -> Scroll DOWN
-                        pyautogui.scroll(-250)
+                        if HAS_PYAUTOGUI:
+                            try:
+                                pyautogui.scroll(-250)
+                            except Exception:
+                                pass
                         self.last_scroll_time = current_time
             self.prev_scroll_y = current_y
 
@@ -78,12 +106,20 @@ class OSController:
         elif gesture == "THUMBS_UP":
             self.prev_scroll_y = None
             if current_time - self.last_volume_time > self.volume_cooldown:
-                pyautogui.press('volumeup')
+                if HAS_PYAUTOGUI:
+                    try:
+                        pyautogui.press('volumeup')
+                    except Exception:
+                        pass
                 self.last_volume_time = current_time
 
         # 5. THUMBS DOWN -> Decrease Volume
         elif gesture == "THUMBS_DOWN":
             self.prev_scroll_y = None
             if current_time - self.last_volume_time > self.volume_cooldown:
-                pyautogui.press('volumedown')
+                if HAS_PYAUTOGUI:
+                    try:
+                        pyautogui.press('volumedown')
+                    except Exception:
+                        pass
                 self.last_volume_time = current_time
