@@ -11,22 +11,7 @@ from os_controller import OSController
 # PROJECT PATHS
 # ============================================================
 
-# Project structure:
-#
-# Air canvas/
-# ├── backend/
-# │   ├── app.py
-# │   ├── hand_detector.py
-# │   ├── gesture_engine.py
-# │   └── os_controller.py
-# │
-# ├── templates/
-# │   └── index.html
-# │
-# └── static/
-#     ├── css/
-#     └── js/
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 TEMPLATE_DIR = BASE_DIR / "frontend" / "templates"
 STATIC_DIR = BASE_DIR / "frontend" / "static"
